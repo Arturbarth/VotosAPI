@@ -1,6 +1,6 @@
-package com.arturbarth.VotosAPI.Controller.DTO;
+package com.arturbarth.VotosAPI.v1.Controller.DTO;
 
-import com.arturbarth.VotosAPI.Model.Associado;
+import com.arturbarth.VotosAPI.v1.Model.Associado;
 
 public class AssociadoDto {
     
