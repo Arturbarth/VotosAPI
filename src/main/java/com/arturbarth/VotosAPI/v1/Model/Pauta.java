@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 
@@ -13,28 +16,38 @@ public class Pauta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pautaId;
+    private Long id;
+
+    @NotNull @NotEmpty
     private String descricao;
-    private LocalDateTime criacao;
+
+    private LocalDateTime criacao = LocalDateTime.now();
     
     @ManyToOne
     private Associado associadoCriador;
 
-    /**
-     * @return Long return the pautaId
-     */
-    public Long getPautaId() {
-        return pautaId;
+    public Pauta(){
+    }
+
+    public Pauta(String descricao, Associado associadoCriador){
+       this.descricao = descricao;
+       this.associadoCriador = associadoCriador;
     }
 
     /**
-     * @param pautaId the pautaId to set
+     * @return Long return the id
      */
-    public void setPautaId(Long pautaId) {
-        this.pautaId = pautaId;
+    public Long getId() {
+        return id;
     }
-                
-    
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+                    
     /**
      * @return String return the descricao
      */

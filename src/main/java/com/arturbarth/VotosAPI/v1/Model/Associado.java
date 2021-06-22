@@ -1,25 +1,47 @@
 package com.arturbarth.VotosAPI.v1.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(
+	name = "Associado",
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {
+				"CPF"
+			})
+	})
 public class Associado {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(
+		name = "CPF",
+		unique = true)
     private String cpf;
+
+    @NotNull
+    @Column
     private String nome;
 
-    public Associado() {
-	}
-	
-	public Associado(String cpf, String nome) {
-		this.cpf = cpf;
-		this.nome = nome;
-	}
+    public Associado(){
+        
+    }
+
+    public Associado(String cpf, String nome){
+       this.cpf = cpf;
+       this.nome = nome;
+    }
 
     @Override
 	public int hashCode() {

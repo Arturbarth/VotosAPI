@@ -1,5 +1,54 @@
 package com.arturbarth.VotosAPI.v1.Controller.Form;
 
-public class SessaoVotacaoForm {
-    
+import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import com.arturbarth.VotosAPI.v1.Model.Pauta;
+import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import antlr.collections.List;
+
+public class SessaoVotacaoForm {   
+
+    @NotNull
+    private Integer pauta;
+   
+    @NotNull
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
+    private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
+
+    public SessaoVotacao converter(PautaRepository pautaRepository) {
+		Pauta pautar = pautaRepository.getOne(pauta.longValue());
+		return new SessaoVotacao(pautar, validoAte);
+	}
+
+    /**
+     * @return int return the pauta
+     */
+    public Integer getPauta() {
+        return pauta;
+    }
+
+    /**
+     * @param pauta the pauta to set
+     */
+    public void setPauta(Integer pauta) {
+        this.pauta = pauta;
+    }
+
+    /**
+     * @return LocalDateTime return the validoAte
+     */
+    public LocalDateTime getValidoAte() {
+        return validoAte;
+    }
+
+    /**
+     * @param validoAte the validoAte to set
+     */
+    public void setValidoAte(LocalDateTime validoAte) {
+        this.validoAte = validoAte;
+    }
+
 }

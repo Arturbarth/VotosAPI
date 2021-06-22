@@ -8,10 +8,23 @@ import javax.persistence.Enumerated;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(
+	name = "votos",
+	uniqueConstraints = {
+		@UniqueConstraint(
+			columnNames = {
+				"associado_id",
+				"sessao_votacao_id"
+			})
+	})
 public class Voto {
 
     @Id 
@@ -19,12 +32,28 @@ public class Voto {
     private Long id;
 
     @ManyToOne
+    @NotNull    
     private Associado associado;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)    
+    @NotNull
 	private OpcoesVoto voto;    
 
     private LocalDateTime dataVoto = LocalDateTime.now();
+
+    @NotNull
+    @ManyToOne()
+    @JoinColumn(name = "sessao_votacao_id")
+    private SessaoVotacao sessaoVotacao;
+
+    public Voto(){
+    }
+
+    public Voto(Associado associado, SessaoVotacao sessaoVotacao, OpcoesVoto voto){
+       this.associado = associado;
+       this.sessaoVotacao = sessaoVotacao;
+       this.voto = voto;
+    }
 
     /**
      * @return Long return the id
@@ -81,6 +110,22 @@ public class Voto {
      */
     public void setDataVoto(LocalDateTime dataVoto) {
         this.dataVoto = dataVoto;
+    }
+
+
+
+    /**
+     * @return SessaoVotacao return the sessaoVotacao
+     */
+    public SessaoVotacao getSessaoVotacao() {
+        return sessaoVotacao;
+    }
+
+    /**
+     * @param sessaoVotacao the sessaoVotacao to set
+     */
+    public void setSessaoVotacao(SessaoVotacao sessaoVotacao) {
+        this.sessaoVotacao = sessaoVotacao;
     }
 
 }

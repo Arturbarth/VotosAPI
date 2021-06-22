@@ -1,5 +1,6 @@
 package com.arturbarth.VotosAPI.v1.Model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,34 +10,52 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "sessao_votacao")
 public class SessaoVotacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sessaoId;
+    private Long id;
 
     @OneToOne
+    @NotNull
     private Pauta pauta;
 
+    @NotNull
     private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
 
-    @OneToMany
+    @OneToMany(mappedBy = "sessaoVotacao")
     private List<Voto> votos;
+
+    public SessaoVotacao(){
+
+    }
+
+    public SessaoVotacao(Pauta pauta, LocalDateTime validoAte){
+       this.pauta = pauta;
+       this.validoAte = validoAte;
+    }
+    
+    public SessaoVotacao(Pauta pauta, LocalDateTime validoAte, List<Voto> votos){
+        this.pauta = pauta;
+        this.validoAte = validoAte;
+        this.votos = votos;
+     }
     
     /**
      * @return Long return the sessaoId
      */
-    public Long getSessaoId() {
-        return sessaoId;
+    public Long getId() {
+        return id;
     }
 
     /**
-     * @param sessaoId the sessaoId to set
+     * @param id the sessaoId to set
      */
-    public void setSessaoId(Long sessaoId) {
-        this.sessaoId = sessaoId;
+    public void setSessaoId(Long id) {
+        this.id = id;
     }
 
     /**
