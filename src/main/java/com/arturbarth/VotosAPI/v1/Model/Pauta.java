@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Model;
+package com.arturbarth.VotosAPI.v1.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

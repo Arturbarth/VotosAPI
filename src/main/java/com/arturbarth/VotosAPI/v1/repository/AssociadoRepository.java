@@ -1,14 +1,11 @@
 package com.arturbarth.VotosAPI.v1.repository;
 
-import com.arturbarth.VotosAPI.v1.Model.Associado;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface AssociadoRepository extends JpaRepository<Associado, Long> {
+import com.arturbarth.VotosAPI.v1.model.Associado;
 
-    List<Associado> findByNome(String nome);
-    Associado findByCpf(String cpf);
-    
+public interface AssociadoRepository extends JpaRepository<Associado, Long> {  
+    Optional<Associado> findByCpf(String cpf);    
 }

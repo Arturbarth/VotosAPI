@@ -2,7 +2,7 @@ package com.arturbarth.VotosAPI.v1.repository;
 
 import java.util.List;
 
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

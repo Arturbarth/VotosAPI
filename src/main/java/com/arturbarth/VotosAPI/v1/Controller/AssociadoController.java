@@ -1,9 +1,10 @@
 package com.arturbarth.VotosAPI.v1.Controller;
 
-import com.arturbarth.VotosAPI.v1.Controller.DTO.AssociadoDto;
-import com.arturbarth.VotosAPI.v1.Controller.Form.AssociadoForm;
-import com.arturbarth.VotosAPI.v1.Model.Associado;
+import com.arturbarth.VotosAPI.v1.Controller.dto.request.AssociadoRequest;
+import com.arturbarth.VotosAPI.v1.Controller.dto.response.AssociadoResponse;
+import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
+import com.arturbarth.VotosAPI.v1.service.AssociadoService;
 
 import java.net.URI;
 import java.util.List;
@@ -29,6 +30,9 @@ public class AssociadoController {
     @Autowired
     private AssociadoRepository associadoRepository;
 
+	@Autowired
+    private AssociadoService associadoService;
+
     @GetMapping
     public List<Associado> lista(){
         return associadoRepository.findAll();
@@ -45,12 +49,8 @@ public class AssociadoController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<AssociadoDto> cadastrar(@RequestBody @Validated AssociadoForm form, UriComponentsBuilder uriBuilder) {
-		Associado associado = form.converter(associadoRepository);
-		associadoRepository.save(associado);
-		
-		URI uri = uriBuilder.path("/associado/{id}").buildAndExpand(associado.getId()).toUri();
-		return ResponseEntity.created(uri).body(new AssociadoDto(associado));
+	public ResponseEntity<AssociadoResponse> cadastrar(@RequestBody @Validated AssociadoRequest associadoForm, UriComponentsBuilder uriBuilder) {		
+		return associadoService.save(associadoForm, uriBuilder);		
 	}
 		    
 }

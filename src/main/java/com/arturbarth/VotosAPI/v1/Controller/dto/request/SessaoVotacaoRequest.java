@@ -1,15 +1,16 @@
-package com.arturbarth.VotosAPI.v1.Controller.Form;
+package com.arturbarth.VotosAPI.v1.Controller.dto.request;
 
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
-import com.arturbarth.VotosAPI.v1.Model.Pauta;
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
+
+import com.arturbarth.VotosAPI.v1.model.Pauta;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import antlr.collections.List;
 
-public class SessaoVotacaoForm {   
+public class SessaoVotacaoRequest {   
 
     @NotNull
     private Integer pauta;

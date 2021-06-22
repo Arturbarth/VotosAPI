@@ -1,14 +1,14 @@
-package com.arturbarth.VotosAPI.v1.Controller.Form;
+package com.arturbarth.VotosAPI.v1.Controller.dto.request;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.arturbarth.VotosAPI.v1.Model.Associado;
+import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 
 import org.hibernate.validator.constraints.Length;
 
-public class AssociadoForm {
+public class AssociadoRequest {
 	
     @NotNull @NotEmpty @Length(min = 12)
 	private String cpf;

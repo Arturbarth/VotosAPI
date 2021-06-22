@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.arturbarth.VotosAPI.v1.Controller.DTO.SessaoVotacaoDTO;
-import com.arturbarth.VotosAPI.v1.Controller.Form.SessaoVotacaoForm;
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.Controller.dto.request.SessaoVotacaoRequest;
+import com.arturbarth.VotosAPI.v1.Controller.dto.response.SessaoVotacaoResponse;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 
@@ -34,28 +34,28 @@ public class SessaoVotacaoController {
     private PautaRepository pautaRepository;
 
     @GetMapping
-    public List<SessaoVotacaoDTO> lista(){        
+    public List<SessaoVotacaoResponse> lista(){        
         List<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findAll();
-	    return SessaoVotacaoDTO.converter(sessoesVotacao);                
+	    return SessaoVotacaoResponse.converter(sessoesVotacao);                
     }
 
     @GetMapping("/{id}")
-	public ResponseEntity<SessaoVotacaoDTO> detalhar(@PathVariable Long id) {		
+	public ResponseEntity<SessaoVotacaoResponse> detalhar(@PathVariable Long id) {		
         Optional<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findById(id);
 		if (sessoesVotacao.isPresent()) {
-			return ResponseEntity.ok(new SessaoVotacaoDTO(sessoesVotacao.get()));
+			return ResponseEntity.ok(new SessaoVotacaoResponse(sessoesVotacao.get()));
 		}		
 		return ResponseEntity.notFound().build();
 	}	
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<SessaoVotacaoDTO> cadastrar(@RequestBody @Validated SessaoVotacaoForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<SessaoVotacaoResponse> cadastrar(@RequestBody @Validated SessaoVotacaoRequest form, UriComponentsBuilder uriBuilder) {
 		SessaoVotacao sessaoVotacao = form.converter(pautaRepository);
 		sessaoVotacaoRepository.save(sessaoVotacao);
 		
 		URI uri = uriBuilder.path("/sessao/{id}").buildAndExpand(sessaoVotacao.getId()).toUri();
-		return ResponseEntity.created(uri).body(new SessaoVotacaoDTO(sessaoVotacao));
+		return ResponseEntity.created(uri).body(new SessaoVotacaoResponse(sessaoVotacao));
 	}
     
     

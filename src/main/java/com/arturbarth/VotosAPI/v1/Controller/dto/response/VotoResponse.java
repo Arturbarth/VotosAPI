@@ -1,12 +1,12 @@
-package com.arturbarth.VotosAPI.v1.Controller.DTO;
+package com.arturbarth.VotosAPI.v1.Controller.dto.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.arturbarth.VotosAPI.v1.Model.OpcoesVoto;
-import com.arturbarth.VotosAPI.v1.Model.Voto;
+import com.arturbarth.VotosAPI.v1.model.OpcoesVoto;
+import com.arturbarth.VotosAPI.v1.model.Voto;
 
-public class VotoDTO {
+public class VotoResponse {
     
     private String cpfAssociado;
    
@@ -15,17 +15,17 @@ public class VotoDTO {
     private Long sessaoVotacaoId;
 
 
-    public VotoDTO(){
+    public VotoResponse(){
     }
 
-    public VotoDTO(Voto voto) {
+    public VotoResponse(Voto voto) {
         this.cpfAssociado = voto.getAssociado().getCpf();
         this.voto = voto.getVoto();     
         this.sessaoVotacaoId = voto.getSessaoVotacao().getId(); 
     }
 
-    public static List<VotoDTO> converter(List<Voto> votos) {
-		return votos.stream().map(VotoDTO::new).collect(Collectors.toList());
+    public static List<VotoResponse> converter(List<Voto> votos) {
+		return votos.stream().map(VotoResponse::new).collect(Collectors.toList());
 	}
 
     /**

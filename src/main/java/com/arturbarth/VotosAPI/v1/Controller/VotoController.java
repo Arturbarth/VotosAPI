@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.arturbarth.VotosAPI.v1.Controller.DTO.SessaoVotacaoDTO;
-import com.arturbarth.VotosAPI.v1.Controller.DTO.VotoDTO;
-import com.arturbarth.VotosAPI.v1.Controller.Form.SessaoVotacaoForm;
-import com.arturbarth.VotosAPI.v1.Controller.Form.VotoForm;
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
-import com.arturbarth.VotosAPI.v1.Model.Voto;
+import com.arturbarth.VotosAPI.v1.Controller.dto.request.SessaoVotacaoRequest;
+import com.arturbarth.VotosAPI.v1.Controller.dto.request.VotoRequest;
+import com.arturbarth.VotosAPI.v1.Controller.dto.response.SessaoVotacaoResponse;
+import com.arturbarth.VotosAPI.v1.Controller.dto.response.VotoResponse;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.model.Voto;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
@@ -42,9 +42,9 @@ public class VotoController {
     private AssociadoRepository associadoRepository;
 
     @GetMapping
-    public List<VotoDTO> lista(){        
+    public List<VotoResponse> lista(){        
         List<Voto> votos = votoRepository.findAll();
-	    return VotoDTO.converter(votos);                
+	    return VotoResponse.converter(votos);                
     }
 
     @GetMapping("/{id}")
@@ -58,12 +58,12 @@ public class VotoController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<VotoDTO> cadastrar(@RequestBody @Validated VotoForm form, UriComponentsBuilder uriBuilder) {		
+	public ResponseEntity<VotoResponse> cadastrar(@RequestBody @Validated VotoRequest form, UriComponentsBuilder uriBuilder) {		
         Voto voto = form.converter(associadoRepository, sessaoVotacaoRepository);        
 		votoRepository.save(voto);
 		
 		URI uri = uriBuilder.path("/voto/{id}").buildAndExpand(voto.getId()).toUri();
-		return ResponseEntity.created(uri).body(new VotoDTO(voto));
+		return ResponseEntity.created(uri).body(new VotoResponse(voto));
 	}
 
     

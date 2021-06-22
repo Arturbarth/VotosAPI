@@ -1,20 +1,20 @@
-package com.arturbarth.VotosAPI.v1.Controller.Form;
+package com.arturbarth.VotosAPI.v1.Controller.dto.request;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.arturbarth.VotosAPI.v1.Model.Associado;
-import com.arturbarth.VotosAPI.v1.Model.OpcoesVoto;
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
-import com.arturbarth.VotosAPI.v1.Model.Voto;
+import com.arturbarth.VotosAPI.v1.model.Associado;
+import com.arturbarth.VotosAPI.v1.model.OpcoesVoto;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.model.Voto;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 
 import org.hibernate.validator.constraints.Length;
 
-public class VotoForm {
+public class VotoRequest {
 
     @NotNull @NotEmpty @Length(min = 12)
     private String cpf;
@@ -26,9 +26,9 @@ public class VotoForm {
     private Integer sessaoVotacao;
 
     public Voto converter(AssociadoRepository associadoRepository, SessaoVotacaoRepository sessaoVotacaoRepository) {
-		Associado associado = associadoRepository.findByCpf(cpf);
+		Associado associado = associadoRepository.findByCpf(cpf).get();
         SessaoVotacao sessaoVotacaor = sessaoVotacaoRepository.getOne(sessaoVotacao.longValue());
-		return new Voto(associado, sessaoVotacaor, OpcoesVoto.valueOf(voto));
+		return new Voto(associado, sessaoVotacaor, OpcoesVoto.valueOf(voto.toUpperCase()));
 	}    
 
     /**

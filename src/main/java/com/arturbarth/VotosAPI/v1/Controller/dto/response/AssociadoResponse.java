@@ -1,29 +1,28 @@
-package com.arturbarth.VotosAPI.v1.Controller.DTO;
+package com.arturbarth.VotosAPI.v1.Controller.dto.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.arturbarth.VotosAPI.v1.Model.Associado;
+import com.arturbarth.VotosAPI.v1.model.Associado;
 
-public class AssociadoDto {
+public class AssociadoResponse {
     
     private Long id;
     private String cpf;
     private String nome;
 
-    public AssociadoDto(){
-
+    public AssociadoResponse(){
     }
      
 
-    public AssociadoDto(Associado associado) {
+    public AssociadoResponse(Associado associado) {
         this.id = associado.getId();
         this.cpf =  associado.getCpf();
         this.nome =  associado.getNome();
 	}
     
-    public static List<AssociadoDto> converter(List<Associado> pautas) {
-		return pautas.stream().map(AssociadoDto::new).collect(Collectors.toList());
+    public static List<AssociadoResponse> converter(List<Associado> pautas) {
+		return pautas.stream().map(AssociadoResponse::new).collect(Collectors.toList());
 	}
 
     /**

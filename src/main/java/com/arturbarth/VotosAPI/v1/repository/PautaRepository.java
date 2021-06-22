@@ -3,7 +3,7 @@ package com.arturbarth.VotosAPI.v1.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.arturbarth.VotosAPI.v1.Model.Pauta;
+import com.arturbarth.VotosAPI.v1.model.Pauta;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,32 +1,32 @@
-package com.arturbarth.VotosAPI.v1.Controller.DTO;
+package com.arturbarth.VotosAPI.v1.Controller.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.arturbarth.VotosAPI.v1.Model.SessaoVotacao;
+import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 
-public class SessaoVotacaoDTO {    
+public class SessaoVotacaoResponse {    
     private Long sessaoId;    
     private String pauta;
-    private ArrayList<VotoDTO> votos;
+    private ArrayList<VotoResponse> votos;
     private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
     
 
-    public SessaoVotacaoDTO(){
+    public SessaoVotacaoResponse(){
     }
 
-    public SessaoVotacaoDTO(SessaoVotacao sessaoVotacao) {
+    public SessaoVotacaoResponse(SessaoVotacao sessaoVotacao) {
         this.sessaoId = sessaoVotacao.getId();
         this.pauta = sessaoVotacao.getPauta().getId().toString();
         this.validoAte = sessaoVotacao.getValidoAte();
         this.votos = new ArrayList<>();
-		this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoDTO::new).collect(Collectors.toList()));
+		this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoResponse::new).collect(Collectors.toList()));
     }
 
-    public static List<SessaoVotacaoDTO> converter(List<SessaoVotacao> sessoesVotacao) {
-		return sessoesVotacao.stream().map(SessaoVotacaoDTO::new).collect(Collectors.toList());
+    public static List<SessaoVotacaoResponse> converter(List<SessaoVotacao> sessoesVotacao) {
+		return sessoesVotacao.stream().map(SessaoVotacaoResponse::new).collect(Collectors.toList());
 	}
 
     /**
@@ -74,7 +74,7 @@ public class SessaoVotacaoDTO {
     /**
      * @param votos the votos to set
      */
-    public void setVotos(ArrayList<VotoDTO> votos) {
+    public void setVotos(ArrayList<VotoResponse> votos) {
         this.votos = votos;
     }
 

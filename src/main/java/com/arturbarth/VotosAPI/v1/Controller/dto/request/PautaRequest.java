@@ -1,18 +1,15 @@
-package com.arturbarth.VotosAPI.v1.Controller.Form;
+package com.arturbarth.VotosAPI.v1.Controller.dto.request;
 
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.arturbarth.VotosAPI.v1.Model.Associado;
-import com.arturbarth.VotosAPI.v1.Model.Pauta;
+import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
-import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
-
 import org.hibernate.validator.constraints.Length;
 
-public class PautaForm {
+public class PautaRequest {
    
     @NotNull @NotEmpty @Length(min = 5)
     private String descricao;    
@@ -21,7 +18,7 @@ public class PautaForm {
     private String cpf;
 
     public Pauta converter(AssociadoRepository associadoRepository) {
-		Associado associado = associadoRepository.findByCpf(cpf);
+		var associado = associadoRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("Associado não encontrado"));
 		return new Pauta(descricao, associado);
 	}
     
@@ -38,9 +35,6 @@ public class PautaForm {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-   
-
 
     /**
      * @return String return the cpf

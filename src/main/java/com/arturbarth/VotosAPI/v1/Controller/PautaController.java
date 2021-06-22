@@ -6,10 +6,10 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.arturbarth.VotosAPI.v1.Controller.DTO.PautaDTO;
-import com.arturbarth.VotosAPI.v1.Controller.Form.PautaForm;
-import com.arturbarth.VotosAPI.v1.Model.Associado;
-import com.arturbarth.VotosAPI.v1.Model.Pauta;
+import com.arturbarth.VotosAPI.v1.Controller.dto.request.PautaRequest;
+import com.arturbarth.VotosAPI.v1.Controller.dto.response.PautaResponse;
+import com.arturbarth.VotosAPI.v1.model.Associado;
+import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 
@@ -35,9 +35,9 @@ public class PautaController {
     private AssociadoRepository associadoRepository;
 
     @GetMapping
-    public List<PautaDTO> lista(){        
+    public List<PautaResponse> lista(){        
         List<Pauta> pautas = pautaRepository.findAll();
-	    return PautaDTO.converter(pautas);                
+	    return PautaResponse.converter(pautas);                
     }
 
     @GetMapping("/{id}")
@@ -51,12 +51,12 @@ public class PautaController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<PautaDTO> cadastrar(@RequestBody @Validated PautaForm form, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PautaResponse> cadastrar(@RequestBody @Validated PautaRequest form, UriComponentsBuilder uriBuilder) {
 		Pauta pauta = form.converter(associadoRepository);
 		pautaRepository.save(pauta);
 		
 		URI uri = uriBuilder.path("/pauta/{id}").buildAndExpand(pauta.getId()).toUri();
-		return ResponseEntity.created(uri).body(new PautaDTO(pauta));
+		return ResponseEntity.created(uri).body(new PautaResponse(pauta));
 	}
 
 }

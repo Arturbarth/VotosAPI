@@ -1,27 +1,27 @@
-package com.arturbarth.VotosAPI.v1.Controller.DTO;
+package com.arturbarth.VotosAPI.v1.Controller.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.arturbarth.VotosAPI.v1.Model.Pauta;
+import com.arturbarth.VotosAPI.v1.model.Pauta;
 
-public class PautaDTO {
+public class PautaResponse {
     private Long pautaId;
     private String descricao;
     private LocalDateTime criacao;    
     private String cpfAssociadoCriador;    
 
 
-    public PautaDTO(Pauta pauta) {
+    public PautaResponse(Pauta pauta) {
         this.pautaId = pauta.getId();
         this.descricao =  pauta.getDescricao();
         this.criacao =  pauta.getCriacao();
         this.cpfAssociadoCriador = pauta.getAssociadoCriador().getCpf();
 	}
 
-    public static List<PautaDTO> converter(List<Pauta> pautas) {
-		return pautas.stream().map(PautaDTO::new).collect(Collectors.toList());
+    public static List<PautaResponse> converter(List<Pauta> pautas) {
+		return pautas.stream().map(PautaResponse::new).collect(Collectors.toList());
 	}
 
     /**
