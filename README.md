@@ -6,6 +6,7 @@
 - [Git - Para realizar o clone do projeto](https://git-scm.com/downloads)
 - [Docker - Para o container do banco de dados do Projeto](https://docs.docker.com/docker-for-windows/install/)
 - [PostgreSQL - Banco de Dados do Projeto](https://www.postgresql.org/download/)
+- [Desenvolvido por Artur Barth - Linkedin](https://www.linkedin.com/in/artur-barth/)
 
 
 
@@ -48,13 +49,13 @@ O projeto está configurado para executar na porta 8080, certifique-se de que a 
 ### Documentação Swagger
 
 Acesse a documentação da API na seguinte URL:
-
-- [Documentação](http://localhost:8080/swagger-ui.html)
+- [Documentação Swagger neste link localhost:8080](http://45.160.148.172:42000/swagger-ui.html)
+- [Documentação Swagger API Online neste link 45.160.148.172:42000](http://45.160.148.172:42000/swagger-ui.html)
 
 ### Postman
 
 Você pode utilizar o Swagger para testar a API mas se preferir pode testar a API utilizando Postman. Para isso, importe o seguinte arquivo no seu postman:
-- [Postman](https://github.com/Arturbarth/VotosAPI/blob/main/southsystem%20VotoAPI.postman_collection.json)
+- [Download arquivo Postman neste link](https://github.com/Arturbarth/VotosAPI/blob/main/southsystem%20VotoAPI.postman_collection.json)
 
 ### Dependências
 
@@ -96,12 +97,14 @@ Você pode utilizar o Swagger para testar a API mas se preferir pode testar a AP
 A API foi desenvolvida com as seguintes funcionalidades:
 1. Cadastrar um Associado
 * http://localhost:8080/associado
+* http://45.160.148.172:42000/associado
 * Get
 * Post
 * Get{id}
 
 2. Cadastrar uma Pauta
 * http://localhost:8080/pauta
+* http://45.160.148.172:42000/pauta
 * Get
 * Post
 * Get{id}
@@ -109,12 +112,14 @@ A API foi desenvolvida com as seguintes funcionalidades:
 
 3. Abrir uma sessão de votação
 * http://localhost:8080/sessao
+* http://45.160.148.172:42000/sessao
 * Get
 * Post
 * Get{id}
 
 4. Votar
 * http://localhost:8080/voto
+* http://45.160.148.172:42000/voto
 * Get
 * Post
 * Get{id}
@@ -123,7 +128,13 @@ Abaixo imagem da documentação Swagger gerada.
 
 <img width="1608" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038584-13daef80-d3c7-11eb-8055-3a931672f8ae.png">
 
-
+## Decisões técnicas
+Primeiramente quero demonstrar minha imensa gratidão ao [Elton Marai Moreira](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco que me auxiliou e sanou algumas dúvidas ténicas, dando dicas de arquiteturada API.
+Inicialmente pensei em fazer a API muito semelhante ao que é demonstrado nos cursos da ALURA. Ao conversar com o Elton, especialista Java citado logo acima, resolvi mudar um pouco a arquitetura inicialmente proposta onde não haveriam as classes Service e decidi pela implementação das mesmas para separar a lógica e tratamentos de excessão Controller. Isso tem como objetivo aumentar a manutenabilidade e manter a API dentro dos padrões e convenções de desenvolvimento Java.
+Optei pelo banco de dados PostgreSQL por ser um banco de fácil configuração e que se integra super bem com APIs Java, além de ser performático e escalável. Inicialmente ia utilizar Oracle. A decisão de utilizar Oracle não foi levada adiante visto que dificulta configuração, deploy da aplicação e N outros motivos.
+Decidi pelo Apache JMetter para realizar testes de performance da API pois já estou utilizando o mesmo em outro teste de performance que estou implementando há algumas semanas e o mesmo funciona muito bem! Apesar de ter verificado que existem plugins para utilizar na API resolvi não utilizar os mesmos. Pausei o desenvolvimento do teste de performance para focar nessa API. O teste descrito abaixo também utilizará Postgres rsrs
+[Teste de performance Linguagems Programação https://github.com/Arturbarth/TestePerformanceLinguagens](https://github.com/Arturbarth/TestePerformanceLinguagens)
+Tomei a decisão de utilizar o pacote de monitoramento na API para estudar e aprender sobre o seu funcionamento. Além disso, o pacote deixa a API preparada para executar em ambiente containerizado (Docker + Kubernetes por exemplo). 
 
 
 #### Tarefa Bônus 1 - Integração com sistemas externos
@@ -159,10 +170,15 @@ Uso de CPU Médio: 99%
 
 #### Tarefa Bônus 4 - Versionamento da API
 Por falta de prazo resolvi não implementar versionamento na API mas implementei Swagger que facilita a implementação de versionamento na API.
+É possível veriricar também que já deixei a plicação preparada para versionamento, separando os controllers em uma pasta chamda V1. Dessa forma, caso surja a necessidade de desenvolver uma nova versão é possível faze-lo com facilidade seguindo entre várias estratégias disponíveis.
 
 
-# Bonus Publicar API
+## Publicar API
 Resolvi deixar a API rodando via Docker em um servidor, dessa forma vocês podem testar a API diretamente do meu servidor na seguinte URL:
+Os arquivos acima também estão apontando para essa URL que ficará online por tempo limitado.
+
+##### http://45.160.148.172:42000/swagger-ui.html
+
 
 
 
