@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
+import com.arturbarth.VotosAPI.v1.service.PautaService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import antlr.collections.List;
@@ -16,11 +17,10 @@ public class SessaoVotacaoRequest {
     private Integer pauta;
    
     @NotNull
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
 
-    public SessaoVotacao converter(PautaRepository pautaRepository) {
-		Pauta pautar = pautaRepository.getOne(pauta.longValue());
+    public SessaoVotacao converter(PautaService pautaService) {
+		Pauta pautar = pautaService.findById(pauta);
 		return new SessaoVotacao(pautar, validoAte);
 	}
 

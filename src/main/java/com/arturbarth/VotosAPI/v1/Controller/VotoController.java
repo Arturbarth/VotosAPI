@@ -16,8 +16,10 @@ import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 import com.arturbarth.VotosAPI.v1.repository.VotoRepository;
+import com.arturbarth.VotosAPI.v1.service.VotoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,13 +43,18 @@ public class VotoController {
     @Autowired
     private AssociadoRepository associadoRepository;
 
+    @Autowired
+    private VotoService votoService;
+
     @GetMapping
+    @Cacheable
     public List<VotoResponse> lista(){        
         List<Voto> votos = votoRepository.findAll();
 	    return VotoResponse.converter(votos);                
     }
 
     @GetMapping("/{id}")
+    @Cacheable
 	public ResponseEntity<Voto> detalhar(@PathVariable Long id) {
 		Optional<Voto> votos = votoRepository.findById(id);
 		if (votos.isPresent()) {
@@ -58,12 +65,8 @@ public class VotoController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<VotoResponse> cadastrar(@RequestBody @Validated VotoRequest form, UriComponentsBuilder uriBuilder) {		
-        Voto voto = form.converter(associadoRepository, sessaoVotacaoRepository);        
-		votoRepository.save(voto);
-		
-		URI uri = uriBuilder.path("/voto/{id}").buildAndExpand(voto.getId()).toUri();
-		return ResponseEntity.created(uri).body(new VotoResponse(voto));
+	public ResponseEntity<VotoResponse> cadastrar(@RequestBody @Validated VotoRequest votoRequest, UriComponentsBuilder uriBuilder) {		        
+        return votoService.save(votoRequest, uriBuilder);
 	}
 
     

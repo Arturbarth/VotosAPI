@@ -12,8 +12,10 @@ import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
+import com.arturbarth.VotosAPI.v1.service.PautaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +36,18 @@ public class PautaController {
     @Autowired
     private AssociadoRepository associadoRepository;
 
+	@Autowired
+    private PautaService pautaService;
+
     @GetMapping
+	@Cacheable
     public List<PautaResponse> lista(){        
         List<Pauta> pautas = pautaRepository.findAll();
 	    return PautaResponse.converter(pautas);                
     }
 
     @GetMapping("/{id}")
+	@Cacheable
 	public ResponseEntity<Pauta> detalhar(@PathVariable Long id) {
 		Optional<Pauta> pauta = pautaRepository.findById(id);
 		if (pauta.isPresent()) {
@@ -51,12 +58,8 @@ public class PautaController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<PautaResponse> cadastrar(@RequestBody @Validated PautaRequest form, UriComponentsBuilder uriBuilder) {
-		Pauta pauta = form.converter(associadoRepository);
-		pautaRepository.save(pauta);
-		
-		URI uri = uriBuilder.path("/pauta/{id}").buildAndExpand(pauta.getId()).toUri();
-		return ResponseEntity.created(uri).body(new PautaResponse(pauta));
+	public ResponseEntity<PautaResponse> cadastrar(@RequestBody @Validated PautaRequest pautaRequest, UriComponentsBuilder uriBuilder) {
+		return pautaService.save(pautaRequest, uriBuilder);		
 	}
 
 }

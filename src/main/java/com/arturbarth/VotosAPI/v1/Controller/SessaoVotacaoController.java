@@ -11,8 +11,10 @@ import com.arturbarth.VotosAPI.v1.Controller.dto.response.SessaoVotacaoResponse;
 import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
+import com.arturbarth.VotosAPI.v1.service.SessaoVotacaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +35,18 @@ public class SessaoVotacaoController {
     @Autowired
     private PautaRepository pautaRepository;
 
+    @Autowired
+    private SessaoVotacaoService sessaoVotacaoService;
+
     @GetMapping
+    @Cacheable
     public List<SessaoVotacaoResponse> lista(){        
         List<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findAll();
 	    return SessaoVotacaoResponse.converter(sessoesVotacao);                
     }
 
     @GetMapping("/{id}")
+    @Cacheable
 	public ResponseEntity<SessaoVotacaoResponse> detalhar(@PathVariable Long id) {		
         Optional<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findById(id);
 		if (sessoesVotacao.isPresent()) {
@@ -50,12 +57,8 @@ public class SessaoVotacaoController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<SessaoVotacaoResponse> cadastrar(@RequestBody @Validated SessaoVotacaoRequest form, UriComponentsBuilder uriBuilder) {
-		SessaoVotacao sessaoVotacao = form.converter(pautaRepository);
-		sessaoVotacaoRepository.save(sessaoVotacao);
-		
-		URI uri = uriBuilder.path("/sessao/{id}").buildAndExpand(sessaoVotacao.getId()).toUri();
-		return ResponseEntity.created(uri).body(new SessaoVotacaoResponse(sessaoVotacao));
+	public ResponseEntity<SessaoVotacaoResponse> cadastrar(@RequestBody @Validated SessaoVotacaoRequest sessaoVotacaoRequest, UriComponentsBuilder uriBuilder) {
+		return sessaoVotacaoService.save(sessaoVotacaoRequest, uriBuilder);
 	}
     
     

@@ -13,6 +13,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +35,14 @@ public class AssociadoController {
     private AssociadoService associadoService;
 
     @GetMapping
-    public List<Associado> lista(){
+	@Cacheable(value="buscarTodosAssociados")
+    public List<Associado> buscarTodos(){
         return associadoRepository.findAll();
     }
 
     @GetMapping("/{id}")
-	public ResponseEntity<Associado> detalhar(@PathVariable Long id) {
+	@Cacheable(value="buscarAssociadoPorId")
+	public ResponseEntity<Associado> buscarPorId(@PathVariable Long id) {
 		Optional<Associado> associado = associadoRepository.findById(id);
 		if (associado.isPresent()) {
 			return ResponseEntity.of(associado) ;
@@ -49,8 +52,8 @@ public class AssociadoController {
 
     @PostMapping
 	@Transactional
-	public ResponseEntity<AssociadoResponse> cadastrar(@RequestBody @Validated AssociadoRequest associadoForm, UriComponentsBuilder uriBuilder) {		
-		return associadoService.save(associadoForm, uriBuilder);		
+	public ResponseEntity<AssociadoResponse> cadastrar(@RequestBody @Validated AssociadoRequest associadoRequest, UriComponentsBuilder uriBuilder) {		
+		return associadoService.save(associadoRequest, uriBuilder);		
 	}
 		    
 }
