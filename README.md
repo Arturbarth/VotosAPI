@@ -130,9 +130,13 @@ Abaixo imagem da documentação Swagger gerada.
 
 ## Decisões técnicas
 Primeiramente quero demonstrar minha imensa gratidão ao ***[Elton Marai Moreira (Linkedin)](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco*** que me auxiliou sanando algumas dúvidas ténicas, dando dicas de arquiteturada API e etc.
+
 Inicialmente pensei em fazer a API muito semelhante ao que é demonstrado nos cursos da ALURA. Ao conversar com o Elton, especialista Java citado logo acima, resolvi mudar um pouco a arquitetura inicialmente proposta onde não haveriam as classes Service e decidi pela implementação das mesmas para separar a lógica e tratamentos de excessão Controller. Isso tem como objetivo aumentar a manutenabilidade e manter a API dentro dos padrões e convenções de desenvolvimento Java.
+
 Optei pelo banco de dados PostgreSQL por ser um banco de fácil configuração e que se integra super bem com APIs Java, além de ser performático e escalável. Inicialmente ia utilizar Oracle. A decisão de utilizar Oracle não foi levada adiante visto que dificulta configuração, deploy da aplicação e N outros motivos.
+
 Decidi pelo Apache JMetter para realizar testes de performance da API pois já estou utilizando o mesmo em outro teste de performance que estou implementando há algumas semanas e o mesmo funciona muito bem! Apesar de ter verificado que existem plugins para utilizar na API resolvi não utilizar os mesmos. Pausei o desenvolvimento do teste de performance para focar nessa API. O teste descrito abaixo também utilizará Postgres rsrs
+
 [Teste de performance Linguagems Programação https://github.com/Arturbarth/TestePerformanceLinguagens](https://github.com/Arturbarth/TestePerformanceLinguagens)
 Tomei a decisão de utilizar o pacote de monitoramento na API para estudar e aprender sobre o seu funcionamento. Além disso, o pacote deixa a API preparada para executar em ambiente containerizado (Docker + Kubernetes por exemplo). 
 
