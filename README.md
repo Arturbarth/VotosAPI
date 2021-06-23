@@ -43,5 +43,44 @@ Para executar o projeto com o Maven, no diretório raiz executar os comando abai
 ```shell
 .\mvnw spring-boot:run
 ```
-O projeto está configurado para executar na porta 8080.
+O projeto está configurado para executar na porta 8080, certifique-se de que a mesma esteja disponível ou altere o arquivo application.properties e informe a porta.
 
+### Documentação Swagger
+
+Acesse a documentação da API na seguinte URL:
+
+- [Documentação](http://localhost:8080/swagger-ui.html)
+
+### Postman
+
+Você pode utilizar o Swagger para testar a API mas se preferir pode testar a API utilizando Postman. Para isso, importe o seguinte arquivo no seu postman:
+- [Postman](https://github.com/Arturbarth/VotosAPI/blob/main/southsystem%20VotoAPI.postman_collection.json)
+
+## Funcionalidades
+
+A API foi desenvolvida com as seguintes funcionalidades:
+1. Cadastrar um Associado
+* http://localhost:8080/associado
+* Get
+* Post
+* Get{id}
+
+
+2. Cadastrar uma Pauta
+* http://localhost:8080/pauta
+* Get
+* Post
+* Get{id}
+
+
+3. Abrir uma sessão de votação
+* http://localhost:8080/sessao
+* Get
+* Post
+* Get{id}
+
+4. Votar
+* http://localhost:8080/voto
+* Get
+* Post
+* Get{id}
