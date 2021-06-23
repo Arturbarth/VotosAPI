@@ -8,10 +8,12 @@ import com.arturbarth.VotosAPI.v1.Controller.dto.request.VotoRequest;
 import com.arturbarth.VotosAPI.v1.Controller.dto.response.VotoResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.SessaoVotacaoEncerradaExpt;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoJaVotouExpt;
+import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoPodeVotarExpt;
 import com.arturbarth.VotosAPI.v1.model.Voto;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 import com.arturbarth.VotosAPI.v1.repository.VotoRepository;
+import com.arturbarth.VotosAPI.v1.service.ValidaCpfService;
 import com.arturbarth.VotosAPI.v1.service.VotoService;
 
 import org.springframework.http.ResponseEntity;
@@ -26,12 +28,14 @@ public class VotoServiceImpl implements VotoService {
     private final VotoRepository votoRepository;
     private final SessaoVotacaoRepository sessaoVotacaoRepository;
     private final AssociadoRepository associadoRepository;
+    private final ValidaCpfService ValidaCpfSerive;
 
     public VotoServiceImpl(VotoRepository votoRepository, SessaoVotacaoRepository sessaoVotacaoRepository,
-            AssociadoRepository associadoRepository) {
+            AssociadoRepository associadoRepository, ValidaCpfService validaCpfService) {
         this.votoRepository = votoRepository;
         this.sessaoVotacaoRepository = sessaoVotacaoRepository;
         this.associadoRepository = associadoRepository;
+        this.ValidaCpfSerive = validaCpfService;
     }
 
     @Override
@@ -45,6 +49,9 @@ public class VotoServiceImpl implements VotoService {
         Voto voto = votoRequest.converter(associadoRepository, sessaoVotacaoRepository);                         
         if(LocalDateTime.now().isAfter(voto.getSessaoVotacao().getValidoAte())) {
             throw new SessaoVotacaoEncerradaExpt();
+        }
+        if (!ValidaCpfSerive.validarCpf(votoRequest.getCpf())){
+            throw new AssociadoNaoPodeVotarExpt();
         }
         //o tratamento de voto duplicado na sessão de votação por CPF ficará somente na UNIQUE pois não sei como tratar ainda.
         votoRepository.save(voto);

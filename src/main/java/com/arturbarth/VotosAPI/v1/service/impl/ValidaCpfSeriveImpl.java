@@ -13,26 +13,28 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Service
 public class ValidaCpfSeriveImpl implements ValidaCpfService {
 
     private String url = "https://user-info.herokuapp.com/users/";    
 
     @Override
-    public boolean validarCpf(final String cpf){
+    public boolean validarCpf(String cpf){
         ValidaCpfResponse response = retornaCpfValido(cpf);
         return "ABLE_TO_VOTE".equalsIgnoreCase(response.getStatus());
     }
     
-    private ValidaCpfResponse retornaCpfValido(final String cpf) {
+    private ValidaCpfResponse retornaCpfValido(String cpf) {         
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entidade = new HttpEntity<>(headers);
 
-        String recurso = UriComponentsBuilder.fromHttpUrl(url+cpf).toUriString();
+        String recurso = UriComponentsBuilder.fromHttpUrl(url+cpf.replaceAll("\\D+","")).toUriString();
 		try {
 			RestTemplate requisicao = new RestTemplate();
             ResponseEntity<ValidaCpfResponse> response = requisicao.exchange(recurso, HttpMethod.GET, entidade, ValidaCpfResponse.class);

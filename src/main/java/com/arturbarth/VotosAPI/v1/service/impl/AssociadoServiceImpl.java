@@ -6,9 +6,11 @@ import com.arturbarth.VotosAPI.v1.Controller.dto.request.AssociadoRequest;
 import com.arturbarth.VotosAPI.v1.Controller.dto.response.AssociadoResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoJaExisteExpt;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoCadastrado;
+import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoPodeVotarExpt;
 import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.service.AssociadoService;
+import com.arturbarth.VotosAPI.v1.service.ValidaCpfService;
 
 import java.net.URI;
 import java.util.List;
@@ -23,9 +25,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class AssociadoServiceImpl implements AssociadoService {
     
     private final AssociadoRepository associadoRepository;
+    private final ValidaCpfService validaCpfSerive;
 
-    public AssociadoServiceImpl(AssociadoRepository associadoRepository){
+    public AssociadoServiceImpl(AssociadoRepository associadoRepository, ValidaCpfService validaCpfSerive){
       this.associadoRepository = associadoRepository;
+      this.validaCpfSerive = validaCpfSerive;
     }
 
     @Override
@@ -39,11 +43,15 @@ public class AssociadoServiceImpl implements AssociadoService {
     }
 
     @Override
-    public ResponseEntity<AssociadoResponse> save(AssociadoRequest associadoForm, UriComponentsBuilder uriBuilder){        
-        if (findByCpfOptional(associadoForm.getCpf()).isPresent()){
-          throw new AssociadoJaExisteExpt(associadoForm.getCpf());
+    public ResponseEntity<AssociadoResponse> save(AssociadoRequest associadoRequest, UriComponentsBuilder uriBuilder){        
+        if (findByCpfOptional(associadoRequest.getCpf()).isPresent()){
+          throw new AssociadoJaExisteExpt(associadoRequest.getCpf());
         }
-        Associado associado = associadoForm.converter(associadoRepository);        
+        if (!validaCpfSerive.validarCpf(associadoRequest.getCpf())){
+            throw new AssociadoNaoPodeVotarExpt();   
+        }
+
+        Associado associado = associadoRequest.converter(associadoRepository);        
 		associadoRepository.save(associado);
 
         URI uri = uriBuilder.path("/associado/{id}").buildAndExpand(associado.getId()).toUri();

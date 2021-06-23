@@ -16,6 +16,7 @@ import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 import com.arturbarth.VotosAPI.v1.repository.VotoRepository;
+import com.arturbarth.VotosAPI.v1.service.ValidaCpfService;
 import com.arturbarth.VotosAPI.v1.service.VotoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,10 @@ public class VotoController {
     private SessaoVotacaoRepository sessaoVotacaoRepository;//só esta declarada para o Spring realizar a injeção no construtor do votoService
 
     @Autowired
-    private AssociadoRepository associadoRepository;//só esta declarada para o Spring realizar a injeção no construtor do votoService
+    private AssociadoRepository associadoRepository;//só esta declarada para o Spring realizar a injeção no construtor do votoService    
+
+    @Autowired
+    private ValidaCpfService validaCpfService;//só esta declarada para o Spring realizar a injeção no construtor do votoService  
 
     @Autowired
     private VotoService votoService;

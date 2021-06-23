@@ -41,8 +41,8 @@ public class SessaoVotacaoController {
     @GetMapping
     @Cacheable(value="retornarSessaoVotacao")
     public List<SessaoVotacaoResponse> lista(){        
-        List<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findAll();
-	    return SessaoVotacaoResponse.converter(sessoesVotacao);                
+        List<SessaoVotacaoResponse> listaResp = SessaoVotacaoResponse.converter(sessaoVotacaoRepository.findAll()); 
+	    return listaResp;               
     }
 
     @GetMapping("/{id}")

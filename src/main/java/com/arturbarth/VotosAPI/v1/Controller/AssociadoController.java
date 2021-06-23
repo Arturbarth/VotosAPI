@@ -5,6 +5,7 @@ import com.arturbarth.VotosAPI.v1.Controller.dto.response.AssociadoResponse;
 import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 import com.arturbarth.VotosAPI.v1.service.AssociadoService;
+import com.arturbarth.VotosAPI.v1.service.ValidaCpfService;
 
 import java.net.URI;
 import java.util.List;
@@ -33,6 +34,10 @@ public class AssociadoController {
 
 	@Autowired
     private AssociadoService associadoService;
+
+	@Autowired
+    private ValidaCpfService validaCpfService;//só esta declarada para o Spring realizar a injeção no construtor do votoService  
+
 
     @GetMapping
 	@Cacheable(value="buscarTodosAssociados")

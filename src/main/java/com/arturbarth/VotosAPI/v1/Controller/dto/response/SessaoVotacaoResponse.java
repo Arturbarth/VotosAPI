@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.arturbarth.VotosAPI.v1.model.OpcoesVoto;
 import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 
 public class SessaoVotacaoResponse {    
     private Long sessaoId;    
-    private String pauta;
-    private ArrayList<VotoResponse> votos;
+    private String pauta;    
     private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
-    
+
+    private ArrayList<VotoResponse> votos;
     private ResultadoVotacaoResponse resultadoVotacao;
 
     public SessaoVotacaoResponse(){
@@ -22,12 +23,22 @@ public class SessaoVotacaoResponse {
         this.sessaoId = sessaoVotacao.getId();
         this.pauta = sessaoVotacao.getPauta().getId().toString();
         this.validoAte = sessaoVotacao.getValidoAte();
+            
         this.votos = new ArrayList<>();
-        if (sessaoVotacao.getVotos() != null) this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoResponse::new).collect(Collectors.toList()));
+        if (sessaoVotacao.getVotos() != null){
+            this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoResponse::new).collect(Collectors.toList()));
+
+            Integer quantidadeVotos = this.votos.size();
+            Integer quantidadeVotosSim = (int) sessaoVotacao.getVotos().stream().filter(c -> c.getVoto() == OpcoesVoto.SIM).count();
+		    Integer quantidadeVotosNao = (int) sessaoVotacao.getVotos().stream().filter(c -> c.getVoto() == OpcoesVoto.NAO).count();
+            
+            resultadoVotacao = new ResultadoVotacaoResponse(quantidadeVotos, quantidadeVotosSim, quantidadeVotosNao);
+        } 
     }
 
     public static List<SessaoVotacaoResponse> converter(List<SessaoVotacao> sessoesVotacao) {
-		return sessoesVotacao.stream().map(SessaoVotacaoResponse::new).collect(Collectors.toList());
+        List<SessaoVotacaoResponse> listaResp = sessoesVotacao.stream().map(SessaoVotacaoResponse::new).collect(Collectors.toList());
+		return listaResp;
 	}
 
     /**
@@ -77,6 +88,20 @@ public class SessaoVotacaoResponse {
      */
     public void setVotos(ArrayList<VotoResponse> votos) {
         this.votos = votos;
+    }
+    
+    /**
+     * @return ResultadoVotacaoResponse return the resultadoVotacao
+     */
+    public ResultadoVotacaoResponse getResultadoVotacao() {
+        return resultadoVotacao;
+    }
+
+    /**
+     * @param resultadoVotacao the resultadoVotacao to set
+     */
+    public void setResultadoVotacao(ResultadoVotacaoResponse resultadoVotacao) {
+        this.resultadoVotacao = resultadoVotacao;
     }
 
 }
