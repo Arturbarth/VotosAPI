@@ -49,8 +49,8 @@ O projeto está configurado para executar na porta 8080, certifique-se de que a 
 ### Documentação Swagger
 
 Acesse a documentação da API na seguinte URL:
-- [Documentação Swagger neste link localhost:8080](http://45.160.148.172:42000/swagger-ui.html)
-- [Documentação Swagger API Online neste link 45.160.148.172:42000](http://45.160.148.172:42000/swagger-ui.html)
+- [Documentação Swagger neste link http://45.160.148.172:42000/swagger-ui.html](http://45.160.148.172:42000/swagger-ui.html)
+- [Documentação Swagger API Online neste link http://45.160.148.172:42000/swagger-ui.html](http://45.160.148.172:42000/swagger-ui.html)
 
 ### Postman
 
@@ -129,7 +129,7 @@ Abaixo imagem da documentação Swagger gerada.
 <img width="1608" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038584-13daef80-d3c7-11eb-8055-3a931672f8ae.png">
 
 ## Decisões técnicas
-Primeiramente quero demonstrar minha imensa gratidão ao [Elton Marai Moreira](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco que me auxiliou e sanou algumas dúvidas ténicas, dando dicas de arquiteturada API.
+Primeiramente quero demonstrar minha imensa gratidão ao ***[Elton Marai Moreira (Linkedin)](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco*** que me auxiliou sanando algumas dúvidas ténicas, dando dicas de arquiteturada API e etc.
 Inicialmente pensei em fazer a API muito semelhante ao que é demonstrado nos cursos da ALURA. Ao conversar com o Elton, especialista Java citado logo acima, resolvi mudar um pouco a arquitetura inicialmente proposta onde não haveriam as classes Service e decidi pela implementação das mesmas para separar a lógica e tratamentos de excessão Controller. Isso tem como objetivo aumentar a manutenabilidade e manter a API dentro dos padrões e convenções de desenvolvimento Java.
 Optei pelo banco de dados PostgreSQL por ser um banco de fácil configuração e que se integra super bem com APIs Java, além de ser performático e escalável. Inicialmente ia utilizar Oracle. A decisão de utilizar Oracle não foi levada adiante visto que dificulta configuração, deploy da aplicação e N outros motivos.
 Decidi pelo Apache JMetter para realizar testes de performance da API pois já estou utilizando o mesmo em outro teste de performance que estou implementando há algumas semanas e o mesmo funciona muito bem! Apesar de ter verificado que existem plugins para utilizar na API resolvi não utilizar os mesmos. Pausei o desenvolvimento do teste de performance para focar nessa API. O teste descrito abaixo também utilizará Postgres rsrs
