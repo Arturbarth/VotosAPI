@@ -34,20 +34,20 @@ public class PautaController {
     private PautaRepository pautaRepository;
     
     @Autowired
-    private AssociadoRepository associadoRepository;
+    private AssociadoRepository associadoRepository;//só esta declarada para o Spring realizar a injeção no construtor do pautaService
 
 	@Autowired
     private PautaService pautaService;
 
     @GetMapping
-	@Cacheable
+	@Cacheable(value="retornarPautas")
     public List<PautaResponse> lista(){        
         List<Pauta> pautas = pautaRepository.findAll();
 	    return PautaResponse.converter(pautas);                
     }
 
     @GetMapping("/{id}")
-	@Cacheable
+	@Cacheable(value="retornarPautaPorId")
 	public ResponseEntity<Pauta> detalhar(@PathVariable Long id) {
 		Optional<Pauta> pauta = pautaRepository.findById(id);
 		if (pauta.isPresent()) {

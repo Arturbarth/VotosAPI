@@ -12,7 +12,6 @@ public class PautaResponse {
     private LocalDateTime criacao;    
     private String cpfAssociadoCriador;    
 
-
     public PautaResponse(Pauta pauta) {
         this.pautaId = pauta.getId();
         this.descricao =  pauta.getDescricao();

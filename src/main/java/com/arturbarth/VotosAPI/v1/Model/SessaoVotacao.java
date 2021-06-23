@@ -30,7 +30,6 @@ public class SessaoVotacao {
     private List<Voto> votos;
 
     public SessaoVotacao(){
-
     }
 
     public SessaoVotacao(Pauta pauta, LocalDateTime validoAte){

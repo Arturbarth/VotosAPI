@@ -33,20 +33,20 @@ public class SessaoVotacaoController {
     private SessaoVotacaoRepository sessaoVotacaoRepository;
 
     @Autowired
-    private PautaRepository pautaRepository;
+    private PautaRepository pautaRepository;//só esta declarada para o Spring realizar a injeção no construtor do sessaoVotacaoService
 
     @Autowired
     private SessaoVotacaoService sessaoVotacaoService;
 
     @GetMapping
-    @Cacheable
+    @Cacheable(value="retornarSessaoVotacao")
     public List<SessaoVotacaoResponse> lista(){        
         List<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findAll();
 	    return SessaoVotacaoResponse.converter(sessoesVotacao);                
     }
 
     @GetMapping("/{id}")
-    @Cacheable
+    @Cacheable(value="retornarSessaoVotacaoPorId")
 	public ResponseEntity<SessaoVotacaoResponse> detalhar(@PathVariable Long id) {		
         Optional<SessaoVotacao> sessoesVotacao = sessaoVotacaoRepository.findById(id);
 		if (sessoesVotacao.isPresent()) {

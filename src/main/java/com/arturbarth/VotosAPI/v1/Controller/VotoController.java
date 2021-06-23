@@ -38,23 +38,23 @@ public class VotoController {
     private VotoRepository votoRepository;
 
     @Autowired
-    private SessaoVotacaoRepository sessaoVotacaoRepository;
+    private SessaoVotacaoRepository sessaoVotacaoRepository;//só esta declarada para o Spring realizar a injeção no construtor do votoService
 
     @Autowired
-    private AssociadoRepository associadoRepository;
+    private AssociadoRepository associadoRepository;//só esta declarada para o Spring realizar a injeção no construtor do votoService
 
     @Autowired
     private VotoService votoService;
 
     @GetMapping
-    @Cacheable
+    @Cacheable(value="retornarVoto")
     public List<VotoResponse> lista(){        
         List<Voto> votos = votoRepository.findAll();
 	    return VotoResponse.converter(votos);                
     }
 
     @GetMapping("/{id}")
-    @Cacheable
+    @Cacheable(value="retornarVotoPorId")
 	public ResponseEntity<Voto> detalhar(@PathVariable Long id) {
 		Optional<Voto> votos = votoRepository.findById(id);
 		if (votos.isPresent()) {

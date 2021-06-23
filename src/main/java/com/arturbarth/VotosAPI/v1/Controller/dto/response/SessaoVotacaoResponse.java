@@ -13,6 +13,7 @@ public class SessaoVotacaoResponse {
     private ArrayList<VotoResponse> votos;
     private LocalDateTime validoAte = LocalDateTime.now().plusMinutes(1);
     
+    private ResultadoVotacaoResponse resultadoVotacao;
 
     public SessaoVotacaoResponse(){
     }
@@ -22,7 +23,7 @@ public class SessaoVotacaoResponse {
         this.pauta = sessaoVotacao.getPauta().getId().toString();
         this.validoAte = sessaoVotacao.getValidoAte();
         this.votos = new ArrayList<>();
-		this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoResponse::new).collect(Collectors.toList()));
+        if (sessaoVotacao.getVotos() != null) this.votos.addAll(sessaoVotacao.getVotos().stream().map(VotoResponse::new).collect(Collectors.toList()));
     }
 
     public static List<SessaoVotacaoResponse> converter(List<SessaoVotacao> sessoesVotacao) {
