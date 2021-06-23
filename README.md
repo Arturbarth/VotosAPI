@@ -56,6 +56,41 @@ Acesse a documentação da API na seguinte URL:
 Você pode utilizar o Swagger para testar a API mas se preferir pode testar a API utilizando Postman. Para isso, importe o seguinte arquivo no seu postman:
 - [Postman](https://github.com/Arturbarth/VotosAPI/blob/main/southsystem%20VotoAPI.postman_collection.json)
 
+### Dependências
+
+* spring-boot-starter-data-jpa
+** Dependência de acesso à dados, ex JpaRepository, abstraindo toda a camada de acesso.
+
+* spring-boot-starter-web
+** Dependência utilizada na API para trabalhar com REST e requisições HTTP
+
+* spring-boot-starter-validation
+** Necessária para anotações de validações. Ex: @NotNull
+
+* spring-boot-devtools
+** Para facilitar o desenvolvimento, dar auto-refresh no servidor
+
+* postgresql
+** Banco de dados utilizado no projeto
+
+* spring-boot-starter-test
+** Utilizada para testes no JUnit por exemplo mas não implementei ainda por falta de prazo.
+
+* lombok (utilizei no inicio mas resolvi remover e utilizar somente starter-validation )
+
+* jakarta.validation-api
+** BeanValidation utilizada na API
+
+* springdoc-openapi-ui
+** Utilizado para gerar a documentação Swagger da API automáticamente.
+
+* spring-boot-starter-actuator
+** Utilizado para monitoramento do projeto, utilizado principalmente quando "containerizar" a aplicação para rodar via Docker e Kubernetes. Fornece monitoramento de falhas da API.
+
+* spring-boot-starter-cache
+** Utilizado para gerar uma camada de cache nas requisições, dessa forma reduz drásticamente o acesso ao banco de dados trazendo mais performance para a aplicação.
+
+
 ## Funcionalidades
 
 A API foi desenvolvida com as seguintes funcionalidades:
@@ -64,7 +99,6 @@ A API foi desenvolvida com as seguintes funcionalidades:
 * Get
 * Post
 * Get{id}
-
 
 2. Cadastrar uma Pauta
 * http://localhost:8080/pauta
