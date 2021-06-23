@@ -131,19 +131,38 @@ Vi alguns tutoriais na internet e verificado que é super fácil implementar com
 #### Tarefa Bônus 3 - Performance
 Utilizei JMetter para aferir alguns testes na API sem cache.
 Após verificar os resultados resolvi pesquisar sobre como melhorar e resolvi implementar o sistema de cache que é super simples e de rápida implementação.
-Aumentei também o pool de conexões do Postgre visto que estou executando 100 Threads.
+Aumentei também o pool de conexões do Postgres visto que estou executando 100 Threads.
 
 Testes realizados em um Intel Core i9 10850k @4.9Ghz:
 
 ##### Teste de vazão da API sem Cache:
+Resultado para 1 milhão de requisições GET em Associado com 10 associados cadastrados:
+Tempo: 1:35 = 1 minuto e 35 segundos.
+Vazão: 10.525,7 requests por segundo.
+Uso de CPU Médio: 91%
+
 <img width="1526" alt="Resultado Vazão sem Cache" src="https://user-images.githubusercontent.com/3423282/123037508-29e7b080-d3c5-11eb-9265-0efc05ef5d32.png">
 
 ##### Teste de vazão da API com Cache:
+
+Resultado para 1 milhão de requisições GET em Associado com 10 associados cadastrados:
+Tempo: 1:03 = 1 minuto e 03 segundos
+Vazão: 15.660,0 requests por segundo.
+Uso de CPU Médio: 99%
+
 <img width="1526" alt="Resultado Vazão com Cache" src="https://user-images.githubusercontent.com/3423282/123037563-3d931700-d3c5-11eb-99a4-97cc3f233038.png">
 
+#### Tarefa Bônus 4 - Versionamento da API
+Por falta de prazo resolvi não implementar versionamento na API mas implementei Swagger que facilita a implementação de versionamento na API.
+
+
+# Bonus Publicar API
+Resolvi deixar a API rodando via Docker em um servidor, dessa forma vocês podem testar a API diretamente do meu servidor na seguinte URL:
 
 
 
+
+-------------------
 
 # Desafio Técnico
 ## Objetivo
