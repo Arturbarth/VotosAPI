@@ -121,7 +121,8 @@ A API foi desenvolvida com as seguintes funcionalidades:
 
 Abaixo imagem da documentação Swagger gerada.
 
-<img width="1920" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038437-c8284600-d3c6-11eb-8fd6-e2eb03b23fa3.png">
+<img width="1608" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038584-13daef80-d3c7-11eb-8055-3a931672f8ae.png">
+
 
 
 
