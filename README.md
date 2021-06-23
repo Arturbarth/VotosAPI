@@ -129,7 +129,7 @@ Abaixo imagem da documentação Swagger gerada.
 <img width="1608" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038584-13daef80-d3c7-11eb-8055-3a931672f8ae.png">
 
 ## Decisões técnicas
-Primeiramente quero demonstrar minha imensa gratidão ao ***[Elton Marai Moreira (Linkedin)](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco*** que me auxiliou sanando algumas dúvidas ténicas, dando dicas de arquiteturada API e etc.
+Primeiramente quero demonstrar minha imensa gratidão ao ***[Elton Macari Moreira (Linkedin)](https://www.linkedin.com/in/elton-macari-moreira-31009762/), especialista Java no Itaú Unibanco*** que me auxiliou sanando algumas dúvidas ténicas, dando dicas de arquiteturada API e etc.
 
 Inicialmente pensei em fazer a API muito semelhante ao que é demonstrado nos cursos da ALURA. Ao conversar com o Elton, especialista Java citado logo acima, resolvi mudar um pouco a arquitetura inicialmente proposta onde não haveriam as classes Service e decidi pela implementação das mesmas para separar a lógica e tratamentos de excessão Controller. Isso tem como objetivo aumentar a manutenabilidade e manter a API dentro dos padrões e convenções de desenvolvimento Java.
 
