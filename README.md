@@ -119,6 +119,10 @@ A API foi desenvolvida com as seguintes funcionalidades:
 * Post
 * Get{id}
 
+Abaixo imagem da documentação Swagger gerada.
+
+<img width="1920" alt="Documentação Swagger" src="https://user-images.githubusercontent.com/3423282/123038437-c8284600-d3c6-11eb-8fd6-e2eb03b23fa3.png">
+
 
 
 #### Tarefa Bônus 1 - Integração com sistemas externos
