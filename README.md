@@ -7,6 +7,7 @@
 - [Docker - Para o container do banco de dados do Projeto](https://docs.docker.com/docker-for-windows/install/)
 - [PostgreSQL - Banco de Dados do Projeto](https://www.postgresql.org/download/)
 - [Desenvolvido por Artur Barth - Linkedin](https://www.linkedin.com/in/artur-barth/)
+- [Mesma API utilizando Blockchain - VotosAPI-BlockChain (Em desenvolvimento)](https://github.com/Arturbarth/VotosAPI-Blockchain)
 
 
 
