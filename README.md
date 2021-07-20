@@ -148,8 +148,7 @@ Tomei a decisão de utilizar o pacote de monitoramento na API para estudar e apr
 Realizado a implementação da validação de CPF em API externa conforme solicitado.
 
 #### Tarefa Bônus 2 - Mensageria e filas
-Nunca trabalhei com messageria e fila em Java, somente trabalhei com messageria em Delphi. 
-Vi alguns tutoriais na internet e verificado que é super fácil implementar com RabbitMQ e com ActiveMQ, ambos possuem plugins do Mavem mas resolvi não implementar por falta de prazo.
+Resolvi não implementar por falta de prazo.
 
 #### Tarefa Bônus 3 - Performance
 Utilizei JMetter para aferir alguns testes na API sem cache.
