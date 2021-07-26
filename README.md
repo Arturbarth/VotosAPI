@@ -1,6 +1,6 @@
 # VotosAPI
 
-- [Acesse a API Publicada neste link: http://45.160.148.172:42000/swagger-ui.html](http://45.160.148.172:42000/swagger-ui.html)
+- [Acesse a API Publicada neste link: http://45.160.148.172:42000/swagger-ui.html    online por tempo limitado.](http://45.160.148.172:42000/swagger-ui.html)  
 
 - [JDK 11: Necessário para executar o projeto Java](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
 - [Postman - Para execução e validação do projeto](https://www.postman.com/downloads/)
