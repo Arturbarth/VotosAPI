@@ -2,8 +2,8 @@ package com.arturbarth.VotosAPI.v1.service.impl;
 
 import java.net.URI;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.AssociadoRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.AssociadoResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.AssociadoRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.AssociadoResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoJaExisteExpt;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoCadastrado;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoPodeVotarExpt;

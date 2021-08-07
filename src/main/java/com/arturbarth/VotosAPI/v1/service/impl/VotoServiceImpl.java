@@ -4,9 +4,9 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.VotoRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.VotoResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.SessaoVotacaoEncerradaExpt;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.VotoRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.VotoResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoJaVotouExpt;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoNaoPodeVotarExpt;
 import com.arturbarth.VotosAPI.v1.model.Voto;

@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller.dto.request;
+package com.arturbarth.VotosAPI.v1.controller.dto.request;
 
 import java.time.LocalDateTime;
 

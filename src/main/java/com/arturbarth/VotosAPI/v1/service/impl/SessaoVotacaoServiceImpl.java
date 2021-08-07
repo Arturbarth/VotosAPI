@@ -2,8 +2,8 @@ package com.arturbarth.VotosAPI.v1.service.impl;
 
 import java.net.URI;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.SessaoVotacaoRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.SessaoVotacaoResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.SessaoVotacaoRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.SessaoVotacaoResponse;
 import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;
 import com.arturbarth.VotosAPI.v1.service.PautaService;

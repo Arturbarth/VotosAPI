@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller.dto.request;
+package com.arturbarth.VotosAPI.v1.controller.dto.request;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 
 public class AssociadoRequest {
 	
-    @NotNull @NotEmpty @Length(min = 12)
+    @NotNull @NotEmpty @Length(min = 11)
 	private String cpf;
 
     @NotNull @NotEmpty

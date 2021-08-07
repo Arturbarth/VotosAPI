@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller;
+package com.arturbarth.VotosAPI.v1.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.SessaoVotacaoRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.SessaoVotacaoResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.SessaoVotacaoRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.SessaoVotacaoResponse;
 import com.arturbarth.VotosAPI.v1.model.SessaoVotacao;
 import com.arturbarth.VotosAPI.v1.repository.PautaRepository;
 import com.arturbarth.VotosAPI.v1.repository.SessaoVotacaoRepository;

@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller.dto.request;
+package com.arturbarth.VotosAPI.v1.controller.dto.request;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

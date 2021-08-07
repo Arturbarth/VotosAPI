@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller.dto.response;
+package com.arturbarth.VotosAPI.v1.controller.dto.response;
 
 public class ResultadoVotacaoResponse {
 

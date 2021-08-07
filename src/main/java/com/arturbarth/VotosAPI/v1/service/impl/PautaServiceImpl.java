@@ -2,8 +2,8 @@ package com.arturbarth.VotosAPI.v1.service.impl;
 
 import java.net.URI;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.PautaRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.PautaResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.PautaRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.PautaResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.PautaNaoCadastradaExpt;
 import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;

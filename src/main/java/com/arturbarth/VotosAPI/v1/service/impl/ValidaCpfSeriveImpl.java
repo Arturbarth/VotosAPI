@@ -2,7 +2,7 @@ package com.arturbarth.VotosAPI.v1.service.impl;
 
 import java.util.Collections;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.ValidaCpfResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.ValidaCpfResponse;
 import com.arturbarth.VotosAPI.v1.exceptions.AssociadoCpfInvalidoExpt;
 import com.arturbarth.VotosAPI.v1.exceptions.FalhaValidarCpfExpt;
 import com.arturbarth.VotosAPI.v1.service.ValidaCpfService;

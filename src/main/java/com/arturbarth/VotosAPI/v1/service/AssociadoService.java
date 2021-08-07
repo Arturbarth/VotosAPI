@@ -2,8 +2,8 @@ package com.arturbarth.VotosAPI.v1.service;
 
 import java.util.Optional;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.AssociadoRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.AssociadoResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.AssociadoRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.AssociadoResponse;
 import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
 

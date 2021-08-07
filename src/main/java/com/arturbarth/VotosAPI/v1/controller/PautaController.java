@@ -1,4 +1,4 @@
-package com.arturbarth.VotosAPI.v1.Controller;
+package com.arturbarth.VotosAPI.v1.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import com.arturbarth.VotosAPI.v1.Controller.dto.request.PautaRequest;
-import com.arturbarth.VotosAPI.v1.Controller.dto.response.PautaResponse;
+import com.arturbarth.VotosAPI.v1.controller.dto.request.PautaRequest;
+import com.arturbarth.VotosAPI.v1.controller.dto.response.PautaResponse;
 import com.arturbarth.VotosAPI.v1.model.Associado;
 import com.arturbarth.VotosAPI.v1.model.Pauta;
 import com.arturbarth.VotosAPI.v1.repository.AssociadoRepository;
